@@ -1,0 +1,192 @@
+OUTPUT
+16. Design an XML document to store information about a student. The information must
+include USN, Name, Branch, Year of Joining, email Id and Contact Number. Make up
+sample database of 5-10 students. Create a CSS style sheet and use it to display
+thedocument.
+(This is an XML program )
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="Info.css" type="text/css"?>
+<student>
+<stud-info>Student Information</stud-info>
+34
+<stud1>
+<usn>USN: 3PD12CS024</usn>
+<name>Name: Aashish S</name>
+<noc>College: PDAC of Engineering</noc>
+<branch>Branch: Computer Science and Engineering</branch>
+<yoj>Year: 2012</yoj>
+<eid>Email: aashishh@me.com</eid>
+</stud1>
+<br/>
+<stud2>
+<usn>USN: 3PD12CS025</usn>
+<name>Name: Anish L R</name>
+<noc>College: PDAC OF Engineering</noc>
+<branch>Branch: Computer Science and Engineering</branch>
+<yoj>Year: 2012</yoj>
+<eid>Email: anishh@me.com</eid>
+</stud2>
+<br/>
+<stud3>
+<usn>USN: 3PD12CS006</usn>
+<name>Name: Amal Antony</name>
+<noc>College: PDAC of Engineering of Engineering</noc>
+<branch>Branch: Computer Science and Engineering</branch>
+<yoj>Year: 2012</yoj>
+<eid>Email: amal@me.com</eid>
+</stud3></student>
+CSS for the above program (info.css)
+student { display:block; font-size:100%; }
+stud-info { display:block; color:green; font-style:italic; font-size:200%; }
+stud1 { display:block; color:blue; font-size:125%;} name { display:block; color: orange; fontsize:150% }
+stud2 { display:block; color:red; font-size:150%;}
+stud3 { display:block; color:pink;font-size:175%; } usn,name,nov,branch,you,did
+{ display:block; }
+OUTPUT
+35
+17. i) Write a Perl script to show server information like Server Name, Server Software,
+server protocol, CGI Revisionetc.
+#!/usr/bin/perl
+use CGI;
+$cgi=new CGI;
+print "Content-type: text/html\n\n";
+print "<html>\n<body>\n";
+print "<div style=\"width: 100%; font-size: 40px; font-weight: bold; text-align: center;\">\n";
+print "<table border=0 cellpadding=2>";
+print "<tr><td>SERVER_NAME: </td><td>", $ENV{'SERVER_NAME'}, "</td></tr>";
+print "<tr><td>SERVER_PORT: </td><td>", $ENV{'SERVER_PORT'}, "</td></tr>";
+print "<tr><td>SERVER_PROTOCOL: </td><td>", $ENV{'SERVER_PROTOCOL'},
+"</td></tr>";
+print "<tr><td>SERVER_SOFTWARE: </td><td>", $ENV{'SERVER_SOFTWARE'},
+"</td></tr>";
+print "<tr><td>CONTENT_LENGTH: </td><td>", $ENV{'CONTENT_LENGTH'},
+"</td></tr>";
+print "<tr><td>GATEWAY_INTERFACE:</td><td>", $ENV{'GATEWAY_INTERFACE'},
+"</td></tr>";
+print "<tr><td>PATH_INFO: </td><td>", $ENV{'PATH_INFO'}, "</td></tr>";
+print "<tr><td>PATH_TRANSLATED: </td><td>", $ENV{'PATH_TRANSLATED'},
+"</td></tr>";
+print "<tr><td>QUERY_STRING: </td><td>", $ENV{'QUERY_STRING'}, "</td></tr>";
+print "<tr><td>REMOTE_ADDR: </td><td>", $ENV{'REMOTE_ADDR'}, "</td></tr>";
+print "<tr><td>REMOTE_HOST: </td><td>", $ENV{'REMOTE_HOST'}, "</td></tr>";
+print "<tr><td>REMOTE_USER: </td><td>", $ENV{'REMOTE_USER'}, "</td></tr>";
+36
+print "<tr><td>REQUEST_METHOD: </td><td>", $ENV{'REQUEST_METHOD'},
+"</td></tr>";
+print "<tr><td>DOCUMENT_NAME: </td><td>", $ENV{'DOCUMENT_NAME'},
+"</td></tr>";
+print "<tr><td>DOCUMENT_URI: </td><td>", $ENV{'DOCUMENT_URI'},
+"</td></tr>";
+print "<tr><td>SCRIPT_NAME: </td><td>", $ENV{'SCRIPT_NAME'}, "</td></tr>";
+print "<tr><td>SCRIPT_FILENAME: </td><td>", $ENV{'SCRIPT_FILENAME'},
+"</td></tr>";
+print "</table>";
+print "\n</div>\n";
+print "</body>\n</html>\n";
+OUTPUT
+ii) Write a Perl program to accept OS command and to display the output ofthe
+commandexecuted.
+#!/usr/bin/perl
+use CGI;
+$cgi=new CGI;
+print "Content-type: text/html\n\n";
+print "<html>\n<body>\n";
+print "<div style=\"width: 100%; font-size: 40px; font-weight: bold; text-align: center;\">\n";
+print $cgi->h1('OS Command Executor');
+print $cgi->hr;
+print $cgi->h3('Please enter the Dos command');
+print $cgi->start_form( -method=>'post', -action=>'/cgi-enabled/prog9b.cgi');
+print "Os Command:";
+print $cgi->textfield( -name=>'command',-value=>'');
+print $cgi->submit( -name=>'submit',-value=>'Execute');
+print $cgi->reset;
+print $cgi->end_form;
+print $cgi->hr;
+$command=$cgi->param("command");
+if($command ne "")
+{
+print " The output of the Os command: $command";
+$output=`$command`;
+print "<pre>";
+print $output;
+print "</pre>";
+}
+print $cgi->hr;
+print "\n</div>\n";
+print "</body>\n</html>\n";
+37
+OUTPUT
+iii) Write a Perl program to count number of Visitors visiting the web page using session
+variable. Display this count of visitors with properheadings.
+#!/usr/bin/perl
+use CGI;
+$cgi=new CGI;
+print "Content-type: text/html\n\n";
+print "<html>\n<body>\n";
+print "<div style=\"width: 100%; font-size: 40px; font-weight: bold; text-align: center;\">\n";
+print $cgi->h1('<center>Server Page Visited Informations</center>');
+print $cgi->hr;
+$count_file="count.txt";
+if(open(FILE,"<".$count_file)) {
+$no_accesses=<FILE>;
+close(FILE);
+if(open (FILE,">".$count_file)) {
+$no_accesses++;
+print FILE $no_accesses;
+close(FILE);
+}
+else {
+print "Cannot write the file. No Visitors information in the server";
+}
+}
+else
+{
+print "cannot read the counter database for visitors";
+}
+print "Welcome User";
+print "<BR><BR>This page has been accessed <font color=red size=10> $no_accesses</font>
+times from the creation";
+print "\n</div>\n";
+print "</body>\n</html>\n";
+OUTPUT
+Welcome User
+This page has been accessed 2 times from the creation
+18. I) Write a PHP program to store current data-time in a COOKIEand display
+theLastvisitedon?date-timeonthewebpageuponreopeningthe samepage.
+<?php
+date_default_timezone_set('Asia/kolkota');
+$inTwoMonths=60*60*24*60+time();
+setcookie('lastVisit',date("G:i-m/d/y"),$inTwoMonths);
+38
+if(isset($_COOKIE['lastVisit']))
+{
+$visit=$_COOKIE['lastVisit'];
+echo "your last visit was - ",$visit;
+}
+else
+echo " you have got some stale cookies";
+?>
+OUTPUT
+you have got some stale of cookies
+(After refresh )
+Your last visit was -13:07 -29/01/2021
+ii) Write a PHP program to count number of visits that increments and display after each
+refresh of the page.
+<?
+session_start();
+session.save_path=/var/www/html/temp/SESSION
+session_register("count);
+if(!isset($_SESSION))
+{
+$_SESSION["count"]=0;
+echo "counter initiazed ";
+}
+else
+{
+$_SESSION["count"]++;
+}
+echo "The counter is now $_SESSION[count] reload this page to increment ";
+?>
+OUTPUT
+The counter is now 1
+Reload this page to increment
